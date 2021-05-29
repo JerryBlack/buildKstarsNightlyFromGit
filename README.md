@@ -10,7 +10,9 @@ This script has been tested on Ubuntu-mate 20.04.2. The AstroPi3 github project 
 
 ### Modify the script
 
-You may want to edit the script to indicate where to create the build directories. The current default is ~/ for the path variable and will attempt to create a Projects directory at that location. I build mine on an external SSD.
+You may want to edit the script to indicate where to create the build directories. The current default is `~/` for the path variable and will attempt to create a Projects directory at that location. I build mine on an external SSD.
+
+The script has a variable set to disable Build Testing: `build_testing=-DBUILD_TESTING=OFF`
 
 You have to change the file extension to .sh and chmod +x this shell script to make it executable.
 
@@ -34,7 +36,7 @@ indi3rdparty     - compile and install indi-3rdparty<br>
 kstars           - compile kstars<br>
 help             - this message
 
-Having run with option *all*, subsequent runs could be limited to *update*, followed by the compile portions depending on which libraries have been updated.
+Having run with option `all`, subsequent runs could be limited to `update`, followed by the compile portions depending on which libraries have been updated.
 
 Cheers 
  Jerry
