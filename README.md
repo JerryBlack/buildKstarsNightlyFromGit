@@ -39,4 +39,3 @@ Having run with option *all*, subsequent runs could be limited to *update*, foll
 Cheers 
  Jerry
  
- [buildKstarsNightlyFromGit.txt](https://github.com/JerryBlack/buildKstarsNightlyFromGit/files/6563813/buildKstarsNightlyFromGit.txt)
