@@ -25,16 +25,18 @@ There may be errors, as I'm not a proficient scripter, so this is not optimal, o
 ````
 This script accepts a single parameter from these options:
 
-all              - run everything<br>
-dependencies     - install the dependencies<br>
-clone            - clone the repositories<br>
-update           - update the repositories \(git pull\)<br>
-stellarsolver    - clone and install stellarsolver<br>
-indicore         - compile and install indi-core<br>
-indi3rdpartylibs - compile and install indi-3rdparty-libs<br>
-indi3rdparty     - compile and install indi-3rdparty<br>
-kstars           - compile kstars<br>
-help             - this message
+Option| Action
+------|---------------------------
+all| run everything
+dependencies| install the dependencies
+clone| clone the repositories
+update| update the repositories \(git pull\)
+stellarsolver| clone and install stellarsolver
+indicore| compile and install indi-core
+indi3rdpartylibs| compile and install indi-3rdparty-libs
+indi3rdparty| compile and install indi-3rdparty
+kstars| compile kstars
+help| this list
 
 Having run with option `all`, subsequent runs could be limited to `update`, followed by the compile portions depending on which libraries have been updated.
 
