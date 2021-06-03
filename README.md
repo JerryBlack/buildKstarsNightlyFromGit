@@ -14,9 +14,9 @@ You may want to edit the script to indicate where to create the build directorie
 
 The script has a variable set to disable Build Testing: `build_testing=-DBUILD_TESTING=OFF`
 
-You have to change the file extension to .sh and chmod +x this shell script to make it executable.
+*You have to change the file extension* to .sh and chmod +x this shell script to make it executable.
 
-You may want to change the `jobs` parameter from the default`-j3` option setting the number of concurrent compiles depending on your machine.
+You may want to change the `jobs` variable from the default`-j3` value, setting the number of concurrent compiles depending on your machine.
 
 There may be errors, as I'm not a proficient scripter, so this is not optimal, or informed. Having said that, it does appear to build an up-to-date working version. This script will break when the consituent packages change their library pre-requisites.
 
