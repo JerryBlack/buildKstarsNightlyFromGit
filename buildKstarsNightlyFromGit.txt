@@ -12,6 +12,9 @@ p=~
 # Set the option to build testing off by default
 build_testing=-DBUILD_TESTING=OFF
 #================================================
+# Set the number of concurrent compile jobs
+jobs=-j3
+#================================================
 
 run_dependencies=
 run_clone=
@@ -153,7 +156,7 @@ if [ $run_indicore ]; then
     mkdir -p $p/Projects/build/indi-core
     cd $p/Projects/build/indi-core
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo $build_testing $p/Projects/indi || exit 1
-    make -j3 || exit 1
+    make $jobs || exit 1
     sudo make install
 fi
 
@@ -165,7 +168,7 @@ if [ $run_indi3rdpartylibs ]; then
     mkdir -p $p/Projects/build/indi-3rdparty-libs
     cd $p/Projects/build/indi-3rdparty-libs
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_LIBS=1 $build_testing $p/Projects/indi-3rdparty || exit 1
-    make -j3 || exit 1
+    make $jobs || exit 1
     sudo make install
 fi
 
@@ -178,7 +181,7 @@ if [ $run_indi3rdparty ]; then
     cd $p/Projects/build/indi-3rdparty
     #cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_LIMESDR=Off  -DAHP_CORRELATOR=Off $p/Projects/indi-3rdparty
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo $build_testing $p/Projects/indi-3rdparty || exit 1
-    make -j3 || exit 1
+    make $jobs || exit 1
     sudo make install
 fi
 
@@ -190,7 +193,7 @@ if [ $run_kstars ]; then
     mkdir -p $p/Projects/kstars-build
     cd $p/Projects/kstars-build
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCCACHE_SUPPORT=ON $build_testing  ../kstars || exit 1
-    make -j3 || exit 1
+    make $jobs || exit 1
     # See note below before executing the below
     #sudo make install
 	echo ==============================================================
