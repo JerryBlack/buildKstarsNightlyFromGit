@@ -96,7 +96,8 @@ if [ $run_dependencies ]; then
     sudo apt-get install -y libqt5websockets5-dev xplanet xplanet-images qt5keychain-dev libsecret-1-dev
     sudo apt-get install -y breeze-icon-theme libftdi1-dev libdc1394-dev libftdi-dev 
     sudo apt-get install -y libgps-dev libraw-dev libgphoto2-dev libboost-dev libboost-regex-dev 
-    sudo apt-get install -y librtlsdr-dev liblimesuite-dev libavcodec-dev libavdevice-dev
+    sudo apt-get install -y librtlsdr-dev liblimesuite-dev libavcodec-dev libavdevice-dev 
+	sudo apt-get install -y libftdi1-dev libdc1394-22-dev libeigen3-dev
 fi
 
 # Clone the Indi and KStars source code
