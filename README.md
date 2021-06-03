@@ -16,6 +16,8 @@ The script has a variable set to disable Build Testing: `build_testing=-DBUILD_T
 
 You have to change the file extension to .sh and chmod +x this shell script to make it executable.
 
+You may want to change the `-j3` option setting the number of concurrent compiles (in each the four `make` lines) depending on your machine.
+
 There may be errors, as I'm not a proficient scripter, so this is not optimal, or informed. Having said that, it does appear to build an up-to-date working version. This script will break when the consituent packages change their library pre-requisites.
 
 ### Usage
