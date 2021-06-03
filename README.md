@@ -6,7 +6,7 @@ This shell script recreates the environment that Hy Murveit kindly provided http
 The respective github repositories that this script draws from have much more information about the KStars environment and compiling.
 http://invent.kde.org/education/kstars, https://github.com/indilib/indi, http://github.com/indilib/indi-3rdparty
 
-This script has been tested on Ubuntu-mate 20.04.2. The AstroPi3 github project by Ron Lancaster https://github.com/rlancaste/AstroPi3 is an excellent starting point for setting up your system initially, and was used for this system.
+This script has been tested on Ubuntu-mate 20.04.2. The AstroPi3 github project by Rob Lancaster https://github.com/rlancaste/AstroPi3 is an excellent starting point for setting up your system initially, and was used for this system.
 
 ### Modify the script
 
@@ -16,7 +16,7 @@ The script has a variable set to disable Build Testing: `build_testing=-DBUILD_T
 
 You have to change the file extension to .sh and chmod +x this shell script to make it executable.
 
-You may want to change the `-j3` option setting the number of concurrent compiles (in each the four `make` lines) depending on your machine.
+You may want to change the `jobs` parameter from the default`-j3` option setting the number of concurrent compiles depending on your machine.
 
 There may be errors, as I'm not a proficient scripter, so this is not optimal, or informed. Having said that, it does appear to build an up-to-date working version. This script will break when the consituent packages change their library pre-requisites.
 
