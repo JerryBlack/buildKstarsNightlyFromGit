@@ -8,6 +8,8 @@ http://invent.kde.org/education/kstars, https://github.com/indilib/indi, http://
 
 This script has been tested on Ubuntu-mate 20.04.2. The AstroPi3 github project by Rob Lancaster https://github.com/rlancaste/AstroPi3 is an excellent starting point for setting up your system initially, and was used for this system.
 
+A note about using the lastest source code from Git - eventually this will lead to something breaking. That's sorta the whole point of trying the nightly source code, to make it better by providing feedback on code that doesn't work on your system. All those nifty new features... they're just icing on the cake. This script doesn't install this compiled kstars version 'over' your release version, but it does update the underlying indicore and indi3rdparty libraries which may have unintended consequences for your installed release version.
+
 ### Modify the script
 
 You may want to edit the script to indicate where to create the build directories. The current default is `~/` for the path variable and will attempt to create a Projects directory at that location. I build mine on an external SSD.
@@ -18,7 +20,7 @@ The script has a variable set to disable Build Testing: `build_testing=-DBUILD_T
 
 You may want to change the `jobs` variable from the default`-j3` value, setting the number of concurrent compiles depending on your machine.
 
-There may be errors, as I'm not a proficient scripter, so this is not optimal, or informed. Having said that, it does appear to build an up-to-date working version. This script will break when the consituent packages change their library pre-requisites.
+There may be errors, as I'm not a proficient scripter, so this is not optimal, or informed. Having said that, it does appear to build an up-to-date working version for me. This script will break when the consituent packages change their library pre-requisites.
 
 ### Usage
 
