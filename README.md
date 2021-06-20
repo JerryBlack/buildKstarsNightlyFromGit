@@ -1,5 +1,7 @@
 # buildKstarsNightlyFromGit
-A script to clone and build Kstars/indi from their respective git source code repositories at the time of execution. 
+A script to clone and build Kstars and Indi from their respective git source code repositories at the time of execution. 
+
+This script compiles and installs Indi and compiles KStars, but in contrast, installing via the normal standard release does more than just that. The normal standard install also installs several data files that KStars needs to run. Note that to successfully run KStars from this script, you'd need to first have a working install from a recent release, then, on top of that, run this script to obtain/run the latest source code.
 
 This shell script recreates the environment that Hy Murveit kindly provided https://indilib.org/forum/ekos/9709-ekos-no-longer-appears-after-a-kstars-build-last-night.html?start=0#71482. It works for me. It might work for others.
 
@@ -12,7 +14,7 @@ A note about using the lastest source code from Git - eventually this will lead 
 
 ### Modify the script
 
-You may want to edit the script to indicate where to create the build directories. The current default is `~/` for the path variable and will attempt to create a Projects directory at that location. I build mine on an external SSD.
+You may want to edit the script to indicate where to create the build directories. The current default is `p=~/` for the path variable and will attempt to create a Projects directory at that location. In contrast, I build mine on an external SSD. `p=/media/odroid/T5_1T_SSD`
 
 The script has a variable set to disable Build Testing: `build_testing=-DBUILD_TESTING=OFF`
 
