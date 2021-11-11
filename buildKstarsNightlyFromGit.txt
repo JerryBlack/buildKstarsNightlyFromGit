@@ -100,7 +100,8 @@ if [ $run_dependencies ]; then
     sudo apt-get install -y breeze-icon-theme libftdi1-dev libdc1394-dev libftdi-dev 
     sudo apt-get install -y libgps-dev libraw-dev libgphoto2-dev libboost-dev libboost-regex-dev 
     sudo apt-get install -y librtlsdr-dev liblimesuite-dev libavcodec-dev libavdevice-dev 
-	sudo apt-get install -y libftdi1-dev libdc1394-22-dev libeigen3-dev
+    sudo apt-get install -y libftdi1-dev libdc1394-22-dev libeigen3-dev
+    sudo apt-get install -y qml-module-qtquick-dialogs qml-module-qtquick-controls
 fi
 
 # Clone the Indi and KStars source code
@@ -199,7 +200,7 @@ if [ $run_kstars ]; then
 	echo ==============================================================
 	echo = Script execution completed.
 	echo =  This KStars not actually installed, which preserves any release version you may have already installed.
-	echo =  To run this KStars version: $p/Projects/kstars-build/kstars/kstars
+	echo =  To run this KStars version: $p/Projects/kstars-build/bin/kstars
 	echo =  If you wish to install this version run the following from the kstars-build directory
 	echo =    sudo make install
 	echo ==============================================================
