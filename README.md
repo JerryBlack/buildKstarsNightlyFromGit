@@ -42,6 +42,7 @@ indicore| compile and install indi-core
 indi3rdpartylibs| compile and install indi-3rdparty-libs
 indi3rdparty| compile and install indi-3rdparty
 kstars| compile kstars
+compile| update, compile/install the libraries, compile kstars
 help| this list
 
 Having run with option `all`, subsequent runs could be limited to `update`, followed by the compile portions depending on which libraries have been updated.
