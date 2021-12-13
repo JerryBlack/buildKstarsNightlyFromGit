@@ -92,7 +92,7 @@ if [ $run_dependencies ]; then
     sudo apt-get install -y git cmake qt5-default libcfitsio-dev libgsl-dev wcslib-dev
     sudo apt-get install -y libnova-dev libusb-1.0-0-dev zlib1g-dev  
     sudo apt-get install -y build-essential cmake git libjpeg-dev libcurl4-gnutls-dev libtiff-dev libfftw3-dev
-    sudo apt=get install -y libeigen3-dev libindi-dev 
+    sudo apt-get install -y libeigen3-dev libindi-dev 
     sudo apt-get install -y extra-cmake-modules libkf5plotting-dev libqt5svg5-dev libkf5xmlgui-dev libkf5kio-dev 
     sudo apt-get install -y kinit-dev libkf5newstuff-dev kdoctools-dev libkf5notifications-dev qtdeclarative5-dev
     sudo apt-get install -y libkf5crash-dev gettext libraw-dev libkf5notifyconfig-dev 
