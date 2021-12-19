@@ -91,7 +91,7 @@ if [ $run_dependencies ]; then
     #sudo apt-add-repository ppa:mutlaqja/indinightly
  #   sudo apt-get install -y git cmake qt5-default libcfitsio-dev libgsl-dev wcslib-dev
     sudo apt-get install -y qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools
-    sudo apt-get install -y qtdeclarative5-dev libkf5notifications
+    sudo apt-get install -y qtdeclarative5-dev libqt5datavisualization5-dev
     sudo apt-get install -y libnova-dev libusb-1.0-0-dev zlib1g-dev  
     sudo apt-get install -y build-essential cmake git libjpeg-dev libcurl4-gnutls-dev  
     sudo apt-get install -y libtiff-dev libfftw3-dev
@@ -107,7 +107,7 @@ if [ $run_dependencies ]; then
     sudo apt-get install -y librtlsdr-dev liblimesuite-dev libavcodec-dev libavdevice-dev 
     sudo apt-get install -y libftdi1-dev libdc1394-22-dev libeigen3-dev
     sudo apt-get install -y qml-module-qtquick-dialogs qml-module-qtquick-controls
-   sudo apt-get install -y git cmake libcfitsio-dev libgsl-dev wcslib-dev
+    sudo apt-get install -y git cmake libcfitsio-dev libgsl-dev wcslib-dev
  fi
 
 # Clone the Indi and KStars source code
