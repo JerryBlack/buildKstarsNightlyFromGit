@@ -47,6 +47,16 @@ help| this list
 
 Having run with option `all`, subsequent runs could be limited to `update`, followed by the compile portions depending on which libraries have been updated.
 
+### buildKstarsNightlyFromGit_Bullseye.txt
+
+This is a recent test to see if this script can be used to compile/install kstars from github on 32/64 bit versions of the Raspberry Pi Bullseye OS. This appears to work for me (with the contributions suggested by those made in the comments). After a 
+````
+sudo make install
+````
+as detailed in the script, it appears to work for me on both the 32 and 64 bit OSes.
+
+The only issue I had was that I had to configure the top task bar panel to not let the window manager treat the panel as a dock. I had ended up with kstars docked to the top panel and couldn't figure out how to undock it, and get back the top menu line of kstars.
+
 Cheers 
  Jerry
  
