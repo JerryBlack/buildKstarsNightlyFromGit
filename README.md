@@ -59,15 +59,15 @@ The only issue I had was that I had to configure the top task bar panel to not l
 
 ### installgsc.sh
 
-Installs the General Star Catalog if you plan on using the simulators.
+Installs the General Star Catalog if you plan on using the simulators in KStars.
 
 Extracted from Rob Lancaste's excellent AstroPi3 script! 
 
       https://github.com/rlancaste/AstroPi3/blob/master/setupDebianSBC.sh
       
-   change to .sh  extension and chmod +x installgsc.sh     to make it executable
-   then run  ./installgsc.sh   from the the directory in which it resides.
-   requires a relogin/reboot to ensure the environmental variable in /etc/profile is read
+   chmod +x installgsc.sh     to make it executable<br>
+   then run  ./installgsc.sh   from the the directory in which it resides.<br>
+   requires a relogin/reboot to ensure the environmental variable in /etc/profile is read<br>
    
 Cheers 
  Jerry
