@@ -57,6 +57,15 @@ as detailed in the script, it appears to work for me on both the 32 and 64 bit O
 
 The only issue I had was that I had to configure the top task bar panel to not let the window manager treat the panel as a dock. I had ended up with kstars docked to the top panel and couldn't figure out how to undock it, and get back the top menu line of kstars.
 
+### installgsc.sh
+
+Installs the General Star Catalog if you plan on using the simulators to test 
+Extracted from Rob Lancaste's excellent AstroPi3 script! 
+      https://github.com/rlancaste/AstroPi3/blob/master/setupDebianSBC.sh
+   change to .sh  extension and chmod +x installgsc.sh     to make it executable
+   then run  ./installgsc.sh   from the the directory in which it resides.
+   requires a relogin/reboot to ensure the environmental variable in /etc/profile is read
+   
 Cheers 
  Jerry
  
