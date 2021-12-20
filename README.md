@@ -65,9 +65,9 @@ Extracted from Rob Lancaste's excellent AstroPi3 script!
 
       https://github.com/rlancaste/AstroPi3/blob/master/setupDebianSBC.sh
       
-   chmod +x installgsc.sh     to make it executable<br>
-   then run  ./installgsc.sh   from the the directory in which it resides.<br>
-   requires a relogin/reboot to ensure the environmental variable in /etc/profile is read<br>
+   `chmod +x installgsc.sh`     to make it executable<br>
+   then run  `./installgsc.sh`   from the the directory in which it resides.<br>
+   requires a relogin/reboot to ensure the environmental variable `GSCDAT` in `/etc/profile` is read<br>
    
 Cheers 
  Jerry
