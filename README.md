@@ -47,6 +47,12 @@ help| this list
 
 Having run with option `all`, subsequent runs could be limited to `update`, followed by the compile portions depending on which libraries have been updated.
 
+## Installing for 64-bit Raspberry Pi OS  Debian ‘bullseye’
+
+Using the AstroPi3 github project by Rob Lancaster https://github.com/rlancaste/AstroPi3 to expand on the intial 64 bit bullseye, install via the  https://github.com/rlancaste/AstroPi3/blob/master/setupDebianSBC.sh script to create a working (apparently) version. 
+
+I installed phd2 using the guide at https://github.com/OpenPHDGuiding/phd2/wiki/BuildingPHD2OnLinux
+
 ### buildKstarsNightlyFromGit_Bullseye.txt
 
 This is a recent test to see if this script can be used to compile/install kstars from github on 32/64 bit versions of the Raspberry Pi Bullseye OS. This appears to work for me (with the contributions suggested by those made in the comments). After a 
@@ -61,9 +67,7 @@ The only issue I had was that I had to configure the top task bar panel to not l
 
 Installs the General Star Catalog if you plan on using the simulators in KStars.
 
-Extracted from Rob Lancaste's excellent AstroPi3 script! 
-
-      https://github.com/rlancaste/AstroPi3/blob/master/setupDebianSBC.sh
+This script is extracted from Rob Lancaste's excellent AstroPi3 script https://github.com/rlancaste/AstroPi3/blob/master/setupDebianSBC.sh
       
    `chmod +x installgsc.sh`     to make it executable<br>
    then run  `./installgsc.sh`   from the the directory in which it resides.<br>
