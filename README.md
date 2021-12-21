@@ -49,7 +49,7 @@ Having run with option `all`, subsequent runs could be limited to `update`, foll
 
 ## Installing for 64-bit Raspberry Pi OS  Debian ‘bullseye’
 
-Using the AstroPi3 github project by Rob Lancaster https://github.com/rlancaste/AstroPi3 to expand on the intial 64 bit bullseye, install via the  https://github.com/rlancaste/AstroPi3/blob/master/setupDebianSBC.sh script to create a working (apparently) version. I'm not sure if this script installs things that aren't now considered appropiate for "bullseye".
+Using the AstroPi3 github project by Rob Lancaster https://github.com/rlancaste/AstroPi3 to expand on the intial 64 bit bullseye, install via the  https://github.com/rlancaste/AstroPi3/blob/master/setupDebianSBC.sh script to create a working (apparently) version. I'm not sure if this script installs things that are now considered in-appropiate for "bullseye".
 
 I installed phd2 using the guide at https://github.com/OpenPHDGuiding/phd2/wiki/BuildingPHD2OnLinux
 
