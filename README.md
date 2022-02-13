@@ -63,6 +63,8 @@ as detailed in the script, it appears to work for me on both the 32 and 64 bit O
 
 The only issue I had was that I had to configure the top task bar panel to not let the window manager treat the panel as a dock. I had ended up with kstars docked to the top panel and couldn't figure out how to undock it, and get back the top menu line of kstars.
 
+[EDIT: With changes to the original version of the script, it appears that it (the original version) will successfully compile on both Ubuntu and Raspberry Pi OS.]
+
 ### installgsc.sh
 
 Installs the General Star Catalog if you plan on using the simulators in KStars.
