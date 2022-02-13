@@ -2,7 +2,8 @@
 #
 # FROM: https://indilib.org/forum/ekos/9709-ekos-no-longer-appears-after-a-kstars-build-last-night.html#71489
 #  The indi dependencies were taken from from:  github.com/indilib/indi
-#  The kstars dependencies were taken from invent.kde.org/education/kstars/-/blob/master/README.md.
+#  The kstars dependencies were taken from invent.kde.org/education/kstars/-/blob/master/README.md and 
+#   from a post by Nou https://indilib.org/forum/general/10819-indi-support-for-bullseye-64-bit-rpi4.html?start=48#80465
 #
 #===============================
 # Set the destination folder
@@ -14,6 +15,9 @@ build_testing=-DBUILD_TESTING=OFF
 #================================================
 # Set the number of concurrent compile jobs
 jobs=-j3
+#================================================
+# Turn On/Off the inclusion of the Ahp-correlator if the dependency openvlbi library isn't available for your target OS
+ahp_correlator=On
 #================================================
 
 run_dependencies=
@@ -42,6 +46,7 @@ print_help() {
     echo 'indi3rdpartylibs - compile and install indi-3rdparty-libs'
     echo 'indi3rdparty     - compile and install indi-3rdparty'
     echo 'kstars           - compile kstars'
+    echo 'compile          - update, compile/install the libraries, compile kstars'
     echo 'help             - this message'
     exit 0
 }
@@ -74,6 +79,12 @@ elif  [ $arg = 'indi3rdparty' ]; then
     run_indi3rdparty='yes'
 elif  [ $arg = 'kstars' ]; then
     run_kstars='yes'
+elif [ $1 = 'compile' ]; then
+    run_update='yes'
+    run_indicore='yes'
+    run_indi3rdpartylibs='yes'
+    run_indi3rdparty='yes'
+    run_kstars='yes'
 else
     print_help
 fi
@@ -81,65 +92,76 @@ fi
 
 # Install the prequisite libraries
 if [ $run_dependencies ]; then
- 	echo =============================================
+ 	echo ================================================================
+ 	echo ================================================================
  	echo Get the pre-requisite libraries.
 	echo  Note that the release version [not this git development version built by this script] can be retained by using the
 	echo  normal stable ppa version
 	echo   \'sudo apt-add-repository ppa:mutlaqja/ppa\'   
-	echo =============================================
-    #sudo apt-add-repository ppa:mutlaqja/ppa
-    #sudo apt-add-repository ppa:mutlaqja/indinightly
-    sudo apt-get install -y git cmake qt5-default libcfitsio-dev libgsl-dev wcslib-dev
-    sudo apt-get install -y libnova-dev libusb-1.0-0-dev zlib1g-dev  
-    sudo apt-get install -y build-essential cmake git libjpeg-dev libcurl4-gnutls-dev libtiff-dev libfftw3-dev
-    sudo apt-get install -y libeigen3-dev libindi-dev 
-    sudo apt-get install -y extra-cmake-modules libkf5plotting-dev libqt5svg5-dev libkf5xmlgui-dev libkf5kio-dev 
-    sudo apt-get install -y kinit-dev libkf5newstuff-dev kdoctools-dev libkf5notifications-dev qtdeclarative5-dev
-    sudo apt-get install -y libkf5crash-dev gettext libraw-dev libkf5notifyconfig-dev 
-    sudo apt-get install -y libqt5websockets5-dev xplanet xplanet-images qt5keychain-dev libsecret-1-dev
-    sudo apt-get install -y breeze-icon-theme libftdi1-dev libdc1394-dev libftdi-dev 
-    sudo apt-get install -y libgps-dev libraw-dev libgphoto2-dev libboost-dev libboost-regex-dev 
-    sudo apt-get install -y librtlsdr-dev liblimesuite-dev libavcodec-dev libavdevice-dev 
-    sudo apt-get install -y libftdi1-dev libdc1394-22-dev libeigen3-dev
-    sudo apt-get install -y qml-module-qtquick-dialogs qml-module-qtquick-controls
+ 	echo ================================================================
+    	#sudo apt-add-repository ppa:mutlaqja/ppa
+    	#sudo apt-add-repository ppa:mutlaqja/indinightly
+    
+	# qt packages are installed in lieu of qt5-default
+	sudo apt-get install -y \
+	 breeze-icon-theme  build-essential  cmake  extra-cmake-modules  gettext  git \
+	 kdoctools-dev  kinit-dev  libavcodec-dev  libavdevice-dev  libboost-dev  libboost-regex-dev \
+	 libcfitsio-dev  libcurl4-gnutls-dev  libdc1394-22-dev  libdc1394-dev  libeigen3-dev  libfftw3-dev \
+	 libftdi-dev  libftdi1-dev  libgphoto2-dev  libgps-dev  libgsl-dev  libindi-dev  libjpeg-dev  \
+	 libkf5crash-dev  libkf5doctools-dev  libkf5kio-dev  libkf5newstuff-dev  libkf5notifications-dev  \
+	 libkf5notifyconfig-dev  libkf5plotting-dev  libkf5xmlgui-dev  liblimesuite-dev  libnova-dev  \
+	 libqt5svg5-dev  libqt5websockets5-dev  libraw-dev  librtlsdr-dev  libsecret-1-dev  libtiff-dev  \
+	 libusb-1.0-0-dev  libwxgtk3.0-gtk3-dev  libx11-dev  pkg-config  qml-module-qtquick-controls  \
+	 qml-module-qtquick-dialogs  qt5-qmake  qt5keychain-dev  qtbase5-dev  qtbase5-dev-tools  qtchooser  \
+	 qtdeclarative5-dev  wcslib-dev  wx-common  wx3.0-i18n  xplanet  xplanet-images  zlib1g-dev
+        
+	#sudo apt-get install -y libopenvlbi1-dev
 fi
+
 
 # Clone the Indi and KStars source code
 if [ $run_clone ]; then
-	echo ==================================================
+ 	echo ================================================================
 	echo Part 1: Clone the repositories
-	echo ==================================================
+ 	echo ================================================================
     mkdir -p $p/Projects;
     cd $p/Projects
+ 	echo ================================================================
+ 	rm -r indi
     git clone http://github.com/indilib/indi.git
+ 	echo ================================================================
+ 	rm -r indi-3rdparty
     git clone http://github.com/indilib/indi-3rdparty.git
+ 	echo ================================================================
+ 	rm -r kstars
     git clone http://invent.kde.org/education/kstars.git
 fi
 
 # Update the Indi and KStars source code
 if [ $run_update ]; then
-	echo ==================================================
+ 	echo ================================================================
+ 	echo ================================================================
 	echo Part 2: Update the repositories
-	echo ==================================================
+ 	echo ================================================================
     cd $p/Projects/indi
     echo $p/Projects/indi
-    git pull
-    echo ==================================================
+    git pull origin
+ 	echo ================================================================
     cd $p/Projects/indi-3rdparty
    echo $p/Projects/indi-3rdparty
-    git pull
-	echo ==================================================
+    git pull origin
+ 	echo ================================================================
     cd $p/Projects/kstars
     echo $p/Projects/kstars
-    git pull
-
+    git pull origin
 fi
 
 # Clone and install Stellarsolver
 if [ $run_stellarsolver ]; then
-	echo ==================================================
+ 	echo ================================================================
+ 	echo ================================================================
 	echo Part 3: Stellarsolver
-	echo ==================================================
+ 	echo ================================================================
     mkdir -p $p/Projects;
     cd $p/Projects
     rm -R ./stellarsolver/
@@ -151,9 +173,10 @@ fi
 
 # Compile Indi
 if [ $run_indicore ]; then
-	echo ==================================================
+ 	echo ================================================================
+ 	echo ================================================================
 	echo Part 4: Compile Indi
-	echo ==================================================
+ 	echo ================================================================
     mkdir -p $p/Projects/build/indi-core
     cd $p/Projects/build/indi-core
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo $build_testing $p/Projects/indi || exit 1
@@ -163,9 +186,10 @@ fi
 
 # Compile Indi 3rdparty Libraries
 if [ $run_indi3rdpartylibs ]; then
-	echo ==================================================
+ 	echo ================================================================
+ 	echo ================================================================
 	echo Part 5: Compile Indi 3rdparty Libraries
-	echo ==================================================
+ 	echo ================================================================
     mkdir -p $p/Projects/build/indi-3rdparty-libs
     cd $p/Projects/build/indi-3rdparty-libs
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_LIBS=1 $build_testing $p/Projects/indi-3rdparty || exit 1
@@ -175,31 +199,35 @@ fi
 
 # Compile Indi 3rdparty Drivers
 if [ $run_indi3rdparty ]; then
-	echo =================================================
+ 	echo ================================================================
+ 	echo ================================================================
 	echo Part 6: Compile Indi 3rdparty Drivers
-	echo =================================================
+ 	echo ================================================================
     mkdir -p $p/Projects/build/indi-3rdparty
     cd $p/Projects/build/indi-3rdparty
     #cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_LIMESDR=Off  -DAHP_CORRELATOR=Off $p/Projects/indi-3rdparty
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo $build_testing $p/Projects/indi-3rdparty || exit 1
+    # TURN OFF AHP_CORRELATOR as it is missing the openvlbi library for this platform
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DAHP_CORRELATOR=$ahp_correlator $build_testing $p/Projects/indi-3rdparty || exit 1
     make $jobs || exit 1
     sudo make install
 fi
 
 # Compile KStars
 if [ $run_kstars ]; then
-	echo ==================================================
+ 	echo ================================================================
+ 	echo ================================================================
 	echo Part 7: Compile KStars
-	echo ==================================================
+ 	echo ================================================================
     mkdir -p $p/Projects/kstars-build
     cd $p/Projects/kstars-build
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCCACHE_SUPPORT=ON $build_testing  ../kstars || exit 1
     make $jobs || exit 1
     # See note below before executing the below
     #sudo make install
-	echo ==============================================================
+ 	echo ================================================================
+ 	echo ================================================================
 	echo = Script execution completed.
-	echo =  This KStars not actually installed, which preserves any release version you may have already installed.
+	echo =  This KStars is not actually installed, which preserves any release version you may have already installed.
 	echo =  To run this KStars version: $p/Projects/kstars-build/bin/kstars
 	echo =  If you wish to install this version run the following from the kstars-build directory
 	echo =    sudo make install
