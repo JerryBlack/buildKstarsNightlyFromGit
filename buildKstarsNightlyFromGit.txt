@@ -106,7 +106,7 @@ if [ $run_dependencies ]; then
 	sudo apt-get install -y \
 	 breeze-icon-theme  build-essential  cmake  extra-cmake-modules  gettext  git \
 	 kdoctools-dev  kinit-dev  libavcodec-dev  libavdevice-dev  libboost-dev  libboost-regex-dev \
-	 libcfitsio-dev  libcurl4-gnutls-dev  libdc1394-22-dev  libdc1394-dev  libeigen3-dev  libfftw3-dev \
+	 libcfitsio-dev  libcurl4-gnutls-dev  libdc1394-22-dev  libeigen3-dev  libfftw3-dev \
 	 libftdi-dev  libftdi1-dev  libgphoto2-dev  libgps-dev  libgsl-dev  libindi-dev  libjpeg-dev  \
 	 libkf5crash-dev  libkf5doctools-dev  libkf5kio-dev  libkf5newstuff-dev  libkf5notifications-dev  \
 	 libkf5notifyconfig-dev  libkf5plotting-dev  libkf5xmlgui-dev  liblimesuite-dev  libnova-dev  \
