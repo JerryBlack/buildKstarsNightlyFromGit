@@ -11,10 +11,13 @@
 p=~
 #================================================
 # Set the option to build testing off by default
-build_testing=-DBUILD_TESTING=OFF
+compile_options=-Dcompile_options=OFF -fpermissive
 #================================================
-# Set the number of concurrent compile jobs
+# Set the number of concurrent compile jobs. 
+#   What we are really trying to do is to limit the amount of memory used to avoid a compile failure.
+#   With 4G of RAM and 2 G compressed RAM disk one might limit the number of jobs to 3
 jobs=-j3
+# jobs=-j$(($(nproc) - 3))
 #================================================
 # Turn On/Off the inclusion of the Ahp-correlator if the dependency openvlbi library isn't available for your target OS
 ahp_correlator=On
@@ -97,25 +100,72 @@ if [ $run_dependencies ]; then
  	echo Get the pre-requisite libraries.
 	echo  Note that the release version [not this git development version built by this script] can be retained by using the
 	echo  normal stable ppa version
-	echo   \'sudo apt-add-repository ppa:mutlaqja/ppa\'   
+	echo  \'sudo apt-add-repository ppa:mutlaqja/ppa\'   
  	echo ================================================================
     	#sudo apt-add-repository ppa:mutlaqja/ppa
     	#sudo apt-add-repository ppa:mutlaqja/indinightly
     
 	# qt packages are installed in lieu of qt5-default
 	sudo apt-get install -y \
-	 breeze-icon-theme  build-essential  cmake  extra-cmake-modules  gettext  git \
-	 kdoctools-dev  kinit-dev  libavcodec-dev  libavdevice-dev  libboost-dev  libboost-regex-dev \
-	 libcfitsio-dev  libcurl4-gnutls-dev  libdc1394-22-dev  libdc1394-dev  libeigen3-dev  libfftw3-dev \
-	 libftdi-dev  libftdi1-dev  libgphoto2-dev  libgps-dev  libgsl-dev  libindi-dev  libjpeg-dev  \
-	 libkf5crash-dev  libkf5doctools-dev  libkf5kio-dev  libkf5newstuff-dev  libkf5notifications-dev  \
-	 libkf5notifyconfig-dev  libkf5plotting-dev  libkf5xmlgui-dev  liblimesuite-dev  libnova-dev  \
-	 libqt5svg5-dev  libqt5websockets5-dev  libraw-dev  librtlsdr-dev  libsecret-1-dev  libtiff-dev  \
-	 libusb-1.0-0-dev  libwxgtk3.0-gtk3-dev  libx11-dev  pkg-config  qml-module-qtquick-controls  \
-	 qml-module-qtquick-dialogs  qt5-qmake  qt5keychain-dev  qtbase5-dev  qtbase5-dev-tools  qtchooser  \
-	 qtdeclarative5-dev  wcslib-dev  wx-common  wx3.0-i18n  xplanet  xplanet-images  zlib1g-dev
-        
-	#sudo apt-get install -y libopenvlbi1-dev
+	breeze-icon-theme \
+	build-essential \
+	cmake \
+	extra-cmake-modules \
+	gettext \
+	git \
+	kdoctools-dev \
+	kinit-dev \
+	libavcodec-dev \
+	libavdevice-dev \
+	librtlsdr-dev \
+	libboost-dev \
+	libboost-regex-dev \
+	libcfitsio-dev \
+	libcurl4-gnutls-dev \
+	libdc1394-22 \
+	libeigen3-dev \
+	libfftw3-dev \
+	libftdi-dev \
+	libftdi1-dev \
+	libgphoto2-dev \
+	libgps-dev \
+	libgsl-dev \
+	libindi-dev \
+	libjpeg-dev \
+	libkf5crash-dev \
+	libkf5doctools-dev \
+	libkf5kio-dev \
+	libkf5newstuff-dev \
+	libkf5notifications-dev \
+	libkf5notifyconfig-dev \
+	libkf5plotting-dev \
+	libkf5xmlgui-dev \
+	liblimesuite-dev \
+	libnova-dev \
+	libqt5svg5-dev \
+	libqt5websockets5-dev \
+	libraw-dev \
+	librtlsdr-dev \
+	libsecret-1-dev \
+	libtiff-dev \
+	libusb-1.0-0-dev \
+	libwxgtk3.0-gtk3-dev \
+	libx11-dev \
+	pkg-config \
+	qml-module-qtquick-controls \
+	qml-module-qtquick-dialogs \
+	qt5-qmake \
+	qt5keychain-dev \
+	qtbase5-dev \
+	qtbase5-dev-tools \
+	qtchooser \
+	qtdeclarative5-dev \
+	wcslib-dev \
+	wx-common \
+	wx3.0-i18n \
+	xplanet \
+	xplanet-images \
+	zlib1g-dev
 fi
 
 
@@ -179,7 +229,7 @@ if [ $run_indicore ]; then
  	echo ================================================================
     mkdir -p $p/Projects/build/indi-core
     cd $p/Projects/build/indi-core
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo $build_testing $p/Projects/indi || exit 1
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo $compile_options $p/Projects/indi || exit 1
     make $jobs || exit 1
     sudo make install
 fi
@@ -192,7 +242,7 @@ if [ $run_indi3rdpartylibs ]; then
  	echo ================================================================
     mkdir -p $p/Projects/build/indi-3rdparty-libs
     cd $p/Projects/build/indi-3rdparty-libs
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_LIBS=1 $build_testing $p/Projects/indi-3rdparty || exit 1
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DBUILD_LIBS=1 $compile_options $p/Projects/indi-3rdparty || exit 1
     make $jobs || exit 1
     sudo make install
 fi
@@ -207,7 +257,7 @@ if [ $run_indi3rdparty ]; then
     cd $p/Projects/build/indi-3rdparty
     #cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_LIMESDR=Off  -DAHP_CORRELATOR=Off $p/Projects/indi-3rdparty
     # TURN OFF AHP_CORRELATOR as it is missing the openvlbi library for this platform
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DAHP_CORRELATOR=$ahp_correlator $build_testing $p/Projects/indi-3rdparty || exit 1
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DAHP_CORRELATOR=$ahp_correlator $compile_options $p/Projects/indi-3rdparty || exit 1
     make $jobs || exit 1
     sudo make install
 fi
@@ -220,7 +270,7 @@ if [ $run_kstars ]; then
  	echo ================================================================
     mkdir -p $p/Projects/kstars-build
     cd $p/Projects/kstars-build
-    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCCACHE_SUPPORT=ON $build_testing  ../kstars || exit 1
+    cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCCACHE_SUPPORT=ON $compile_options  ../kstars || exit 1
     make $jobs || exit 1
     # See note below before executing the below
     #sudo make install
@@ -234,4 +284,3 @@ if [ $run_kstars ]; then
 	echo ==============================================================
 	cd $p
 fi
-
