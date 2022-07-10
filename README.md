@@ -64,6 +64,8 @@ This script is extracted from Rob Lancaste's excellent AstroPi3 script https://g
    then run  `./installgsc.sh`   from the the directory in which it resides.<br>
    requires a relogin/reboot to ensure the environmental variable `GSCDAT` in `/etc/profile` is read<br>
    
+### Alternative scripts
+
 You may also find Nou's `astro-soft-build` scripts a useful alternative. They are less verbose, but quite useful and may be updated more frequently than this script https://gitea.nouspiro.space/nou/astro-soft-build
    
 Cheers 
