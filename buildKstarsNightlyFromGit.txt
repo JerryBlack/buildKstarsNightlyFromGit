@@ -282,7 +282,7 @@ if [ $run_kstars ]; then
     mkdir -p $p/Projects/kstars-build
     cd $p/Projects/kstars-build
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCCACHE_SUPPORT=ON $compile_options  ../kstars || exit 1
-    make $jobs || exit 1
+    make $jobs kstars || exit 1
     # See note below before executing the below
     # sudo make install
  	echo ================================================================
