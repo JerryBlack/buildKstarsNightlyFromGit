@@ -7,16 +7,17 @@
 #
 #===============================
 # Set the destination folder
-#p=/media/odroid/T5_1T_SSD 
-p=~
+p=/media/odroid/T5_1T_SSD 
+#p=~
 #================================================
 # Set the option to build testing off by default
-compile_options=-Dcompile_options=OFF -fpermissive
+compile_options=-Dcompile_options=OFF 
+#-fpermissive
 #================================================
 # Set the number of concurrent compile jobs. 
 #   What we are really trying to do is to limit the amount of memory used to avoid a compile failure.
 #   With 4G of RAM and 2 G compressed RAM disk one might limit the number of jobs to 3
-jobs=-j3
+jobs=-j4
 # jobs=-j$(($(nproc) - 3))
 #================================================
 # Turn On/Off the inclusion of the Ahp-correlator if the dependency openvlbi library isn't available for your target OS
@@ -100,10 +101,10 @@ if [ $run_dependencies ]; then
  	echo Get the pre-requisite libraries.
 	echo  Note that the release version [not this git development version built by this script] can be retained by using the
 	echo  normal stable ppa version
-	echo  \'sudo apt-add-repository ppa:mutlaqja/ppa\'   
+	echo  sudo apt-add-repository ppa:mutlaqja/ppa\'   
  	echo ================================================================
     	#sudo apt-add-repository ppa:mutlaqja/ppa
-    	#sudo apt-add-repository ppa:mutlaqja/indinightly
+    	#sudo  apt-add-repository ppa:mutlaqja/indinightly
     
 	# qt packages are installed in lieu of qt5-default
 	sudo apt-get install -y \
@@ -113,7 +114,6 @@ if [ $run_dependencies ]; then
 	extra-cmake-modules \
 	gettext \
 	git \
-	kdoctools-dev \
 	kinit-dev \
 	libavcodec-dev \
 	libavdevice-dev \
@@ -122,9 +122,10 @@ if [ $run_dependencies ]; then
 	libboost-regex-dev \
 	libcfitsio-dev \
 	libcurl4-gnutls-dev \
-	libdc1394-22-dev \
+	libdc1394-dev \
 	libeigen3-dev \
-	libfftw3-dev \
+	libev-dev \
+    libfftw3-dev \
 	libftdi-dev \
 	libftdi1-dev \
 	libgphoto2-dev \
@@ -166,6 +167,16 @@ if [ $run_dependencies ]; then
 	xplanet \
 	xplanet-images \
 	zlib1g-dev
+	
+# from Nou 2022/09/22
+#	sudo apt install libnova-dev libcfitsio-dev libusb-1.0-0-dev zlib1g-dev libgsl-dev build-essential cmake git \
+#        libjpeg-dev libcurl4-gnutls-dev libtiff-dev libfftw3-dev libftdi-dev libgps-dev libraw-dev libdc1394-dev libgphoto2-dev \
+#        libboost-dev libboost-regex-dev librtlsdr-dev liblimesuite-dev libftdi1-dev libavcodec-dev libavdevice-dev \
+#        libeigen3-dev extra-cmake-modules libkf5plotting-dev libqt5svg5-dev libkf5xmlgui-dev libkf5kio-dev kinit-dev \
+#        libkf5newstuff-dev libkf5doctools-dev libkf5notifications-dev qtdeclarative5-dev libkf5crash-dev gettext libkf5notifyconfig-dev \
+#        wcslib-dev libqt5websockets5-dev xplanet xplanet-images qt5keychain-dev libsecret-1-dev breeze-icon-theme qml-module-qtquick-controls \
+#        pkg-config libev-dev
+        
 fi
 
 
@@ -273,13 +284,16 @@ if [ $run_kstars ]; then
     cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCCACHE_SUPPORT=ON $compile_options  ../kstars || exit 1
     make $jobs || exit 1
     # See note below before executing the below
-    #sudo make install
+    # sudo make install
  	echo ================================================================
  	echo ================================================================
 	echo = Script execution completed.
-	echo =  This KStars is not actually installed, which preserves any release version you may have already installed.
-	echo =  To run this KStars version: $p/Projects/kstars-build/bin/kstars
-	echo =  If you wish to install this version run the following from the kstars-build directory
+	echo =  This KStars is not actually installed, which preserves any release
+	echo =   version you may have already installed.
+	echo =  To run this KStars version::
+	echo =   $p/Projects/kstars-build/bin/kstars
+	echo =  If you wish to install this version run the following:
+	echo =   from the kstars-build directory
 	echo =    sudo make install
 	echo ==============================================================
 	cd $p
