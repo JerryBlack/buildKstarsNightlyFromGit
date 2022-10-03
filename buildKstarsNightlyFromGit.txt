@@ -7,8 +7,8 @@
 #
 #===============================
 # Set the destination folder
-p=/media/odroid/T5_1T_SSD 
-#p=~
+#p=/media/odroid/T5_1T_SSD 
+p=~
 #================================================
 # Set the option to build testing off by default
 compile_options=-Dcompile_options=OFF 
