@@ -8,7 +8,7 @@ This shell script recreates the environment that Hy Murveit kindly provided http
 The respective github repositories that this script draws from have much more information about the KStars environment and compiling.
 http://invent.kde.org/education/kstars, https://github.com/indilib/indi, http://github.com/indilib/indi-3rdparty
 
-This script has been tested on Ubuntu-mate 20.04.2. The AstroPi3 github project by Rob Lancaster https://github.com/rlancaste/AstroPi3 is an excellent starting point for setting up your system initially, and was used for this system.
+This script has been tested on Ubuntu-mate 20.04.2 and more recently on 22.04.1. The AstroPi3 github project by Rob Lancaster https://github.com/rlancaste/AstroPi3 is an excellent starting point for setting up your system initially, and was used on my system.
 
 A note about using the lastest source code from Git - eventually this will lead to something breaking. That's sorta the whole point of trying the nightly source code, to make it better by providing feedback on code that doesn't work on your system. All those nifty new features... they're just icing on the cake. This script doesn't install this compiled kstars version 'over' your release version, but it does update the underlying indicore and indi3rdparty libraries which may have unintended consequences for your installed release version.
 
